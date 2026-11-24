@@ -12,14 +12,19 @@
     --cor-destaque: #5b5bd6;
     --cor-destaque-hover: #4a4ab8;
     --cor-input: #ffffff;
+    --cor-ascii: #292980;
+    --opacidade-ascii: 1;
 }
 
 body {
     background-color: var(--cor-fundo);
     color: var(--cor-texto);
     max-width: 600px;
+    min-height: calc(100vh - 80px);
     margin: 40px auto;
     padding: 0 20px;
+    display: flex;
+    flex-direction: column;
     transition: background-color 0.25s, color 0.25s;
 }
 
@@ -30,6 +35,8 @@ body.tema-escuro {
     --cor-destaque: #8ba6ff;
     --cor-destaque-hover: #aec0ff;
     --cor-input: #132342;
+    --cor-ascii: #58a6ff;
+    --opacidade-ascii: 0.75;
 }
 
 .barra-superior {
@@ -148,4 +155,44 @@ body.tema-escuro #botaoCadastrar {
     .controle-tema > span {
         display: none;
     }
+}
+
+.arte-ascii {
+    position: fixed;
+    top: 50%;
+    left: calc((50vw - 300px) / 2);
+    transform: translate(-50%, -50%);
+    margin: 0;
+    color: var(--cor-ascii);
+    font-family: Consolas, "Courier New", monospace;
+    font-size: clamp(6px, 0.42vw, 8px);
+    font-weight: normal;
+    line-height: 0.95;
+    letter-spacing: 0;
+    white-space: pre;
+    opacity: var(--opacidade-ascii);
+    pointer-events: none;
+    user-select: none;
+    transition: color 0.25s, opacity 0.25s;
+}
+
+body.tema-escuro .arte-ascii {
+    text-shadow: 0 0 8px rgba(88, 166, 255, 0.25);
+}
+
+@media (max-width: 1349px) {
+    .arte-ascii {
+        display: none;
+    }
+}
+
+footer {
+    margin-top: auto;
+    padding-top: 35px;
+    padding-bottom: 5px;
+    border-top: 1px solid var(--cor-borda);
+    color: var(--cor-texto-suave);
+    text-align: center;
+    font-size: 12px;
+    line-height: 1.6;
 }
