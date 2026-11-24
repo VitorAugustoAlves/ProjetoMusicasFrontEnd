@@ -44,3 +44,36 @@ async function cadastrarMusica() {
 
     window.location.href = "index.html"
 }
+
+const botaoTema = document.getElementById("botaoTema")
+const temaSalvo = localStorage.getItem("tema")
+
+if (temaSalvo === "escuro") {
+    document.body.classList.add("tema-escuro")
+}
+
+atualizarBotaoTema()
+
+botaoTema.addEventListener("click", alternarTema)
+
+function alternarTema() {
+    document.body.classList.toggle("tema-escuro")
+
+    if (document.body.classList.contains("tema-escuro")) {
+        localStorage.setItem("tema", "escuro")
+    } else {
+        localStorage.setItem("tema", "claro")
+    }
+
+    atualizarBotaoTema()
+}
+
+function atualizarBotaoTema() {
+    const modoEscuroAtivo = document.body.classList.contains("tema-escuro")
+
+    botaoTema.setAttribute("aria-pressed", modoEscuroAtivo)
+    botaoTema.setAttribute(
+        "aria-label",
+        modoEscuroAtivo ? "Ativar modo claro" : "Ativar modo escuro"
+    )
+}

@@ -5,12 +5,35 @@
     font-family: Arial, Helvetica, sans-serif;
 }
 
+:root {
+    --cor-fundo: #ffffff;
+    --cor-superficie: #ffffff;
+    --cor-texto: #333333;
+    --cor-texto-secundario: #444444;
+    --cor-texto-suave: #777777;
+    --cor-borda: #cccccc;
+    --cor-destaque: #5b5bd6;
+    --cor-destaque-hover: #4a4ab8;
+}
+
 body {
-    background-color: #ffffff;
-    color: #333333;
+    background-color: var(--cor-fundo);
+    color: var(--cor-texto);
     max-width: 600px;
     margin: 40px auto;
     padding: 0 20px;
+    transition: background-color 0.25s, color 0.25s;
+}
+
+body.tema-escuro {
+    --cor-fundo: #0b1730;
+    --cor-superficie: #132342;
+    --cor-texto: #f3f6ff;
+    --cor-texto-secundario: #d6def0;
+    --cor-texto-suave: #aebbd3;
+    --cor-borda: #344766;
+    --cor-destaque: #8ba6ff;
+    --cor-destaque-hover: #aec0ff;
 }
 
 header {
@@ -28,9 +51,56 @@ header h1 {
 }
 
 header a {
-    color: #5b5bd6;
+    color: var(--cor-destaque);
     text-decoration: underline;
     font-weight: bold;
+}
+
+.header-acoes {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 12px;
+}
+
+.controle-tema {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+#botaoTema {
+    display: flex;
+    padding: 2px;
+    border: 1px solid var(--cor-destaque);
+    background-color: transparent;
+    color: var(--cor-texto-suave);
+    cursor: pointer;
+}
+
+#botaoTema span {
+    display: grid;
+    place-items: center;
+    width: 24px;
+    height: 24px;
+}
+
+#botaoTema .icone-sol,
+body.tema-escuro #botaoTema .icone-lua {
+    background-color: var(--cor-destaque);
+    color: var(--cor-fundo);
+}
+
+body.tema-escuro #botaoTema .icone-sol {
+    background-color: transparent;
+    color: var(--cor-texto-suave);
+}
+
+#botaoTema:focus-visible {
+    outline: 3px solid var(--cor-destaque);
+    outline-offset: 3px;
 }
 
 #listaMusicas {
@@ -40,10 +110,11 @@ header a {
 }
 
 .musica {
-    border: 1px solid #cccccc;
+    border: 1px solid var(--cor-borda);
     border-radius: 8px;
     padding: 20px;
-    background-color: #ffffff;
+    background-color: var(--cor-superficie);
+    transition: background-color 0.25s, border-color 0.25s;
 }
 
 .musica h2 {
@@ -53,13 +124,13 @@ header a {
 
 .musica .artista {
     font-size: 15px;
-    color: #444444;
+    color: var(--cor-texto-secundario);
     margin-bottom: 4px;
 }
 
 .musica .detalhes {
     font-size: 13px;
-    color: #777777;
+    color: var(--cor-texto-suave);
     margin-bottom: 16px;
 }
 
@@ -71,13 +142,28 @@ header a {
 .acoes .editar {
     display: inline-block;
     padding: 6px 16px;
-    border: 1px solid #5b5bd6;
+    border: 1px solid var(--cor-destaque);
     border-radius: 4px;
-    color: #5b5bd6;
+    color: var(--cor-destaque);
     text-decoration: none;
     font-size: 14px;
     font-weight: bold;
     text-align: center;
+}
+
+@media (max-width: 520px) {
+    header {
+        align-items: flex-start;
+        gap: 18px;
+    }
+
+    .header-acoes {
+        gap: 14px;
+    }
+
+    .controle-tema > span {
+        display: none;
+    }
 }
 
 .acoes .apagar {
