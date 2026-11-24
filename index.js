@@ -1,6 +1,7 @@
 const urlBackend = "https://projeto-musicas-beta.vercel.app"
 const listaMusicas = document.getElementById("listaMusicas")
 
+
 async function buscarMusicas(){
     const resposta = await fetch(urlBackend)
     const musicas = await resposta.json()
@@ -38,6 +39,11 @@ async function apagarMusica(id) {
     window.location.reload()
 }
 
+
+//codigo feito extra apenas para estética
+
+
+//modo claro e escuro
 const botaoTema = document.getElementById("botaoTema")
 const temaSalvo = localStorage.getItem("tema")
 
@@ -69,4 +75,21 @@ function atualizarBotaoTema() {
         "aria-label",
         modoEscuroAtivo ? "Ativar modo claro" : "Ativar modo escuro"
     )
+}
+
+//pesquisa de musicas
+function pesquisarMusicas() {
+    const textoPesquisa = document.getElementById("pesquisa").value.toLowerCase()
+
+    const musicas = document.querySelectorAll(".musica")
+
+    musicas.forEach((musica) => {
+        const informacoesMusica = musica.textContent.toLowerCase()
+
+        if(informacoesMusica.includes(textoPesquisa)){
+            musica.style.display = "block"
+        } else {
+            musica.style.display = "none"
+        }
+    })
 }
